@@ -1,6 +1,6 @@
 <template>
     <template if:true= {accounts.data}>
-        <div style="height: 300px;">
+        <div class="account-table">
             <lightning-datatable
                     key-field="id"
                     data={accounts.data}
@@ -9,12 +9,6 @@
                     hide-checkbox-column
                     columns={columns}>
             </lightning-datatable>
-        </div>
-        <div class="slds-m-around-medium">
-            <lightning-button
-                    label="Increase row offset"
-                    onclick={increaseRowOffset}>
-            </lightning-button>
         </div>
     </template>
 </template>
