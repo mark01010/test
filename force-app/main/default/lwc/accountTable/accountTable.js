@@ -1,0 +1,19 @@
+import {LightningElement, wire} from 'lwc';
+import getListAccount from '@salesforce/apex/AccountController.getListAccount';
+
+const columns = [
+    { label: 'Id', fieldName: 'Id' },
+    { label: 'Name', fieldName: 'Name', type: 'string' }
+];
+
+export default class AccountTable extends LightningElement {
+    columns = columns;
+    rowOffset = 0;
+
+    @wire (getListAccount)accounts;
+
+    increaseRowOffset() {
+        console.log(this.accounts);
+        this.rowOffset += 100;
+    }
+}
