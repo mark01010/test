@@ -1,13 +1,11 @@
 <template>
-    <template if:true= {accounts.data}>
-        <div class="account-table">
-            <lightning-datatable
-                    key-field="id"
-                    data={accounts.data}
-                    show-row-number-column
-                    hide-checkbox-column
-                    columns={columns}
-            ></lightning-datatable>
-        </div>
-    </template>
+    <div class="account-table">
+        <lightning-datatable
+                key-field="id"
+                data={accounts}
+                show-row-number-column
+                hide-checkbox-column
+                columns={columns}
+        ></lightning-datatable>
+    </div>
 </template>
