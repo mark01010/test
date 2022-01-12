@@ -8,7 +8,6 @@ const columns = [
 
 export default class AccountTable extends LightningElement {
     columns = columns;
-    rowOffset = 0;
 
     @wire (getListAccount)accounts;
 }
