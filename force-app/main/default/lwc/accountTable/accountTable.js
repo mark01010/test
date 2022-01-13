@@ -1,24 +1,10 @@
 import {LightningElement, wire} from 'lwc';
 import getListAccount from '@salesforce/apex/AccountController.getList';
-
-const columns = [
-    {
-        label: 'Number Contacts', fieldName: 'numberContacts', hideDefaultActions: true,
-        typeAttributes: {
-            label: {fieldName: 'Number Contacts'}
-        }
-    },
-    {
-        label: 'Name', fieldName: 'accountUrl', type: 'url', hideDefaultActions: true,
-        typeAttributes: {
-            label: {fieldName: 'Name'}
-        }
-    }
-];
+import getListContact from '@salesforce/apex/ContactController.getListCurrentAccount';
 
 export default class AccountTable extends LightningElement {
-    columns = columns;
     accounts = [];
+    contacts = [];
 
     @wire (getListAccount)
     getAccounts({data, error}) {
@@ -32,4 +18,16 @@ export default class AccountTable extends LightningElement {
             console.log(error);
         }
     };
+
+    openContacts(event) {
+        let accountId = event.currentTarget.dataset.id;
+        console.log(accountId);
+        getListContact({ idAccount: accountId })
+            .then(result => {
+                this.contacts = result;
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    }
 }

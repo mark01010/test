@@ -1,3 +1,12 @@
-.account-table{
-    height: 300px;
+.contact-table {
+    width: 100%;
+    padding-top: 20px;
+}
+.col-table {
+    display: flex;
+    justify-content: center;
+}
+.row {
+    display: flex;
+    justify-content: center;
 }
