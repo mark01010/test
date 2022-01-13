@@ -1,11 +1,63 @@
 <template>
     <div class="account-table">
-        <lightning-datatable
-                key-field="id"
-                data={accounts}
-                show-row-number-column
-                hide-checkbox-column
-                columns={columns}
-        ></lightning-datatable>
+        <table aria-describedby="account-list" class="slds-table slds-table_bordered">
+            <!--Header of the table-->
+            <thead>
+                <tr >
+                    <th class="slds-size_7-of-8" scope="col">
+                        <div title="Name">Name</div>
+                    </th>
+                    <th class="slds-size_1-of-8" scope="col">
+                        <div class="slds-text-align_center" title="Last Name">Number Contacts</div>
+                    </th>
+                </tr>
+            </thead>
+
+            <!--Body of the table-->
+            <tbody>
+                <template for:each={accounts} for:item="item">
+                    <tr
+                        key={item.Id}
+                        data-id={item.Id}
+                        onclick={openContacts}
+                    >
+                        <td class="slds-size_7-of-8">
+                            <a href={item.accountUrl} target="_blank">{item.Name}</a>
+                        </td>
+                        <td class="slds-size_1-of-8 slds-text-align_center">
+                            {item.numberContacts}
+                        </td>
+                    </tr>
+                </template>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="contact-table">
+        <table aria-describedby="conatact-list" class="slds-table slds-table_bordered ">
+            <!--Header of the table-->
+            <thead>
+                <tr>
+                    <th class="slds-size_1-of-1" scope="col">
+                        <div title="Name">Contact Name</div>
+                    </th>
+                </tr>
+            </thead>
+
+            <!--Body of the table-->
+            <tbody>
+                <template for:each={contacts} for:item="item">
+                    <tr
+                        key={item.Id}
+                        data-id={item.Id}
+                        onclick={openContacts}
+                    >
+                        <td class="slds-size_1-of-1">
+                            {item.Name}
+                        </td>
+                    </tr>
+                </template>
+            </tbody>
+        </table>
     </div>
 </template>

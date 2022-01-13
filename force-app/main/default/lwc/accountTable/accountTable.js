@@ -1,24 +1,12 @@
 import {LightningElement, wire} from 'lwc';
 import getListAccount from '@salesforce/apex/AccountController.getList';
+import getListContact from '@salesforce/apex/ContactController.getListByAccountId';
+import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 
-const columns = [
-    {
-        label: 'Number Contacts', fieldName: 'numberContacts', hideDefaultActions: true,
-        typeAttributes: {
-            label: {fieldName: 'Number Contacts'}
-        }
-    },
-    {
-        label: 'Name', fieldName: 'accountUrl', type: 'url', hideDefaultActions: true,
-        typeAttributes: {
-            label: {fieldName: 'Name'}
-        }
-    }
-];
 
 export default class AccountTable extends LightningElement {
-    columns = columns;
     accounts = [];
+    contacts = [];
 
     @wire (getListAccount)
     getAccounts({data, error}) {
@@ -29,7 +17,24 @@ export default class AccountTable extends LightningElement {
                 numberContacts:  account.Contacts ? account.Contacts.length : 0
             }));
         } else if (error) {
-            console.log(error);
+            this.showErrorToast(error);
         }
     };
+
+    openContacts(event) {
+        let accountId = event.currentTarget.dataset.id;
+        getListContact({ accountId: accountId })
+            .then(result => this.contacts = result)
+            .catch(error => this.showErrorToast(error));
+    }
+
+    showErrorToast(error) {
+        const evt = new ShowToastEvent({
+            title: 'Toast Error',
+            message: error,
+            variant: 'error',
+            mode: 'dismissable'
+        });
+        this.dispatchEvent(evt);
+    }
 }
