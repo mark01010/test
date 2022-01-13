@@ -1,0 +1,36 @@
+<template>
+    <div class="contact-table">
+        <div class="contact-table-title">
+            Contacts Table
+        </div>
+        <template if:false={hasContacts}>
+            No Contacts!
+        </template>
+        <template if:true= {hasContacts}>
+            <table aria-describedby="conatact-list" class="slds-table slds-table_bordered">
+                <!--Header of the table-->
+                <thead>
+                    <tr>
+                        <th class="slds-size_1-of-1" scope="col">
+                            <div title="Name">Contact Name</div>
+                        </th>
+                    </tr>
+                </thead>
+
+                <!--Body of the table-->
+                <tbody>
+                    <template for:each={contacts} for:item="item">
+                        <tr
+                                key={item.Id}
+                                data-id={item.Id}
+                        >
+                            <td class="slds-size_1-of-1">
+                                {item.Name}
+                            </td>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
+        </template>
+    </div>
+</template>

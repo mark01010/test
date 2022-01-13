@@ -32,32 +32,7 @@
             </tbody>
         </table>
     </div>
-
-    <div class="contact-table">
-        <table aria-describedby="conatact-list" class="slds-table slds-table_bordered ">
-            <!--Header of the table-->
-            <thead>
-                <tr>
-                    <th class="slds-size_1-of-1" scope="col">
-                        <div title="Name">Contact Name</div>
-                    </th>
-                </tr>
-            </thead>
-
-            <!--Body of the table-->
-            <tbody>
-                <template for:each={contacts} for:item="item">
-                    <tr
-                        key={item.Id}
-                        data-id={item.Id}
-                        onclick={openContacts}
-                    >
-                        <td class="slds-size_1-of-1">
-                            {item.Name}
-                        </td>
-                    </tr>
-                </template>
-            </tbody>
-        </table>
-    </div>
+    <template if:true={currentAccountId}>
+        <c-contact-table record-id={currentAccountId}></c-contact-table>
+    </template>
 </template>
