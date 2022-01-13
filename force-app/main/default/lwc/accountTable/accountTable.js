@@ -1,6 +1,6 @@
 import {LightningElement, wire} from 'lwc';
 import getListAccount from '@salesforce/apex/AccountController.getList';
-import getListContact from '@salesforce/apex/ContactController.getListCurrentAccount';
+import getListContact from '@salesforce/apex/ContactController.getListByAccountId';
 
 export default class AccountTable extends LightningElement {
     accounts = [];
