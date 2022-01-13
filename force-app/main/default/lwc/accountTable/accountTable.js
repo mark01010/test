@@ -22,7 +22,7 @@ export default class AccountTable extends LightningElement {
     openContacts(event) {
         let accountId = event.currentTarget.dataset.id;
         console.log(accountId);
-        getListContact({ idAccount: accountId })
+        getListContact({ accountId: accountId })
             .then(result => {
                 this.contacts = result;
             })

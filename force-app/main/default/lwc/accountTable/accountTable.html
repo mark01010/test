@@ -1,32 +1,35 @@
 <template>
     <div class="account-table">
-        <table aria-describedby="account-list" class="slds-table  slds-table_bordered ">
+        <table aria-describedby="account-list" class="slds-table slds-table_bordered">
             <!--Header of the table-->
             <thead>
-            <tr class="slds-line-height_reset">
-                <th class="slds-size_7-of-8" scope="col">
-                    <div class="slds-truncate " title="Name">Name</div>
-                </th>
-                <th class="slds-size_1-of-8" scope="col">
-                    <div class="slds-truncate col-table" title="Last Name">Number Contacts</div>
-                </th>
-            </tr>
+                <tr class="slds-line-height_reset">
+                    <th class="slds-size_7-of-8" scope="col">
+                        <div class="slds-truncate" title="Name">Name</div>
+                    </th>
+                    <th class="slds-size_1-of-8" scope="col">
+                        <div class="slds-truncate slds-text-align_center" title="Last Name">Number Contacts</div>
+                    </th>
+                </tr>
             </thead>
 
             <!--Body of the table-->
             <tbody>
-            <template for:each={accounts} for:item="item" for:index="indexVar">
-                <tr key={item.Id} data-id={item.Id} onclick={openContacts} class="slds-hint-parent">
-                    <td class="slds-size_7-of-8">
-                        <a href={item.accountUrl}>{item.Name}</a>
-                    </td>
-                    <td class="slds-size_1-of-8">
-                        <div class="row">
+                <template for:each={accounts} for:item="item" for:index="indexVar">
+                    <tr
+                        key={item.Id}
+                        data-id={item.Id}
+                        onclick={openContacts}
+                        class="slds-hint-parent"
+                    >
+                        <td class="slds-size_7-of-8">
+                            <a href={item.accountUrl} target="_blank">{item.Name}</a>
+                        </td>
+                        <td class="slds-size_1-of-8 slds-text-align_center">
                             {item.numberContacts}
-                        </div>
-                    </td>
-                </tr>
-            </template>
+                        </td>
+                    </tr>
+                </template>
             </tbody>
         </table>
     </div>
@@ -35,22 +38,22 @@
         <table aria-describedby="conatact-list" class="slds-table  slds-table_bordered ">
             <!--Header of the table-->
             <thead>
-            <tr class="slds-line-height_reset">
-                <th class="slds-size_1-of-1" scope="col">
-                    <div class="slds-truncate " title="Name">Contact Name</div>
-                </th>
-            </tr>
+                <tr class="slds-line-height_reset">
+                    <th class="slds-size_1-of-1" scope="col">
+                        <div class="slds-truncate " title="Name">Contact Name</div>
+                    </th>
+                </tr>
             </thead>
 
             <!--Body of the table-->
             <tbody>
-            <template for:each={contacts} for:item="item" for:index="indexVar">
-                <tr key={item.Id} data-id={item.Id} onclick={openContacts} class="slds-hint-parent">
-                    <td class="slds-size_1-of-1">
-                        {item.Name}
-                    </td>
-                </tr>
-            </template>
+                <template for:each={contacts} for:item="item" for:index="indexVar">
+                    <tr key={item.Id} data-id={item.Id} onclick={openContacts} class="slds-hint-parent">
+                        <td class="slds-size_1-of-1">
+                            {item.Name}
+                        </td>
+                    </tr>
+                </template>
             </tbody>
         </table>
     </div>
