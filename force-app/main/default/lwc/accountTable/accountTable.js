@@ -1,6 +1,8 @@
 import {LightningElement, wire} from 'lwc';
 import getListAccount from '@salesforce/apex/AccountController.getList';
 import getListContact from '@salesforce/apex/ContactController.getListByAccountId';
+import { ShowToastEvent } from 'lightning/platformShowToastEvent';
+
 
 export default class AccountTable extends LightningElement {
     accounts = [];
@@ -15,19 +17,24 @@ export default class AccountTable extends LightningElement {
                 numberContacts:  account.Contacts ? account.Contacts.length : 0
             }));
         } else if (error) {
-            console.log(error);
+            this.showErrorToast(error);
         }
     };
 
     openContacts(event) {
         let accountId = event.currentTarget.dataset.id;
-        console.log(accountId);
         getListContact({ accountId: accountId })
-            .then(result => {
-                this.contacts = result;
-            })
-            .catch(error => {
-                console.log(error);
-            });
+            .then(result => this.contacts = result)
+            .catch(error => this.showErrorToast(error));
+    }
+
+    showErrorToast(error) {
+        const evt = new ShowToastEvent({
+            title: 'Toast Error',
+            message: error,
+            variant: 'error',
+            mode: 'dismissable'
+        });
+        this.dispatchEvent(evt);
     }
 }
