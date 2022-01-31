@@ -5,14 +5,14 @@ import {showErrorToast, showSuccessToast} from 'c/showToastService';
 import { refreshApex } from '@salesforce/apex';
 
 export default class ContactTable extends LightningElement {
-    @api accountRecordId;
+    @api recordId;
     contacts = [];
     wiredResult;
     editContactModal;
-    recordId;
+    contactRecordId;
     deleteContactModal;
 
-    @wire(getContactList, {accountId : '$accountRecordId'})
+    @wire(getContactList, {accountId : '$recordId'})
     getList(result) {
         this.wiredResult = result;
         if (result.data) {
@@ -25,8 +25,8 @@ export default class ContactTable extends LightningElement {
         }
     };
 
-    deleteCurrentContact(event){
-        deleteContact({recordId : this.recordId})
+    deleteCurrentContact(){
+        deleteContact({recordId : this.contactRecordId})
             .then(() => {
                 showSuccessToast();
                 refreshApex(this.wiredResult);
@@ -40,7 +40,7 @@ export default class ContactTable extends LightningElement {
 
     openContactEditModal(event) {
         this.editContactModal = true;
-        this.recordId = event.currentTarget.dataset.id
+        this.contactRecordId = event.currentTarget.dataset.id
     }
 
     closeContactEditModal() {
@@ -53,7 +53,7 @@ export default class ContactTable extends LightningElement {
     }
 
     openDeleteModal (event) {
-        this.recordId = event.currentTarget.dataset.id;
+        this.contactRecordId = event.currentTarget.dataset.id;
         this.deleteContactModal = true;
     }
 
