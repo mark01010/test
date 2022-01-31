@@ -1,7 +1,3 @@
-/**
- * Created by mzaluskyi on 14.01.2022.
- */
-
 public with sharing class AccountHandler {
     public static void handle(List<Account> records, Map<Id, Account> oldRecords, TriggerOperation operation) {
         switch on operation {
