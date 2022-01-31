@@ -7,29 +7,14 @@ public with sharing class AccountController {
         ];
     }
 
-    @AuraEnabled(Cacheable = true)
-    public static Account getAccountByIds (Id accountId) {
-        return [
-                SELECT Id, Name, Phone, Rating
-                FROM Account
-                WHERE Id =:accountId
-        ];
+    @AuraEnabled
+    public static void updateAccount(String accountFieldsMap) {
+        Account account = (Account)JSON.deserialize(accountFieldsMap, Account.class);
+        update account;
     }
 
     @AuraEnabled
-    public static void updateAccount(Map<String, String> accountFieldsMap) {
-        Account account = new Account(Id = accountFieldsMap.get('id'));
-
-        if (accountFieldsMap.get('Name') != null) {
-            account.Name = accountFieldsMap.get('Name');
-        }
-        if (accountFieldsMap.get('Phone') != null) {
-            account.Phone = accountFieldsMap.get('Phone');
-        }
-        if (accountFieldsMap.get('Rating') != null) {
-            account.Rating = accountFieldsMap.get('Rating');
-        }
-
-        update account;
+    public static void deleteRecord (String recordId){
+        delete new Account(Id = recordId);
     }
 }

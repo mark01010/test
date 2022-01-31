@@ -1,7 +1,7 @@
 import {LightningElement, wire, track} from 'lwc';
 import getListAccount from '@salesforce/apex/AccountController.getList';
 import {showErrorToast, showSuccessToast} from 'c/showToastService';
-import { deleteRecord } from 'lightning/uiRecordApi';
+import deleteAccount from '@salesforce/apex/AccountController.deleteRecord';
 import { refreshApex } from '@salesforce/apex';
 
 export default class AccountTable extends LightningElement {
@@ -29,13 +29,14 @@ export default class AccountTable extends LightningElement {
         this.currentAccountId = event.currentTarget.dataset.id;
     }
 
-    deleteAccount(event) {
-        deleteRecord(event.currentTarget.dataset.id)
+    deleteAccount() {
+        deleteAccount({recordId : this.currentAccountId})
             .then(() => {
                 showSuccessToast();
                 refreshApex(this.getListAccountResult);
+                this.closeDeleteModal();
             })
-            .catch((error) => showErrorToast(error));
+            .catch(error => showErrorToast(error));
     }
 
     openAccountEditModal(event) {
@@ -52,7 +53,8 @@ export default class AccountTable extends LightningElement {
         this.editAccountModal = false;
     }
 
-    openDeleteModal () {
+    openDeleteModal (event) {
+        this.currentAccountId = event.currentTarget.dataset.id;
         this.deleteAccountModal = true;
     }
 

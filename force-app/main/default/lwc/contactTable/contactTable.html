@@ -52,7 +52,7 @@
                                                   icon-name="utility:delete"
                                                   icon-position="right"
                                                   data-id={item.Id}
-                                                  onclick={deleteCurrentContact}
+                                                  onclick={openDeleteModal}
                                 >
                                 </lightning-button>
                             </td>
@@ -62,6 +62,37 @@
             </table>
         </template>
     </div>
+
+    <template if:true={deleteContactModal}>
+        <section class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <h2 id="modal-heading-01" class="slds-modal__title ">
+                        Delete?
+                    </h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium">
+                    <div class="slds-p-bottom_large slds-p-left_large slds-grid slds-grid_align-space">
+                        <lightning-button
+                                label="Yes"
+                                class="slds-m-top_medium slds-col"
+                                onclick={deleteCurrentContact}
+                        >
+                        </lightning-button>
+                        <lightning-button
+                                class="slds-m-top_medium slds-col"
+                                label="No"
+                                onclick={closeDeleteModal}
+                        ></lightning-button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div
+                class="slds-backdrop slds-backdrop_open modalBackdrops"
+                id="modalBackdrops"
+        ></div>
+    </template>
 
     <template if:true={editContactModal}>
         <c-contact-edit-modal

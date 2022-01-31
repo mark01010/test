@@ -10,6 +10,7 @@ export default class ContactTable extends LightningElement {
     wiredResult;
     editContactModal;
     recordId;
+    deleteContactModal;
 
     @wire(getContactList, {accountId : '$accountRecordId'})
     getList(result) {
@@ -25,7 +26,7 @@ export default class ContactTable extends LightningElement {
     };
 
     deleteCurrentContact(event){
-        deleteContact({recordId : event.currentTarget.dataset.id})
+        deleteContact({recordId : this.recordId})
             .then(() => {
                 showSuccessToast();
                 refreshApex(this.wiredResult);
@@ -40,7 +41,6 @@ export default class ContactTable extends LightningElement {
     openContactEditModal(event) {
         this.editContactModal = true;
         this.recordId = event.currentTarget.dataset.id
-        console.log(this.recordId);
     }
 
     closeContactEditModal() {
@@ -50,5 +50,14 @@ export default class ContactTable extends LightningElement {
     refreshContactTable() {
         refreshApex(this.wiredResult);
         this.editContactModal = false;
+    }
+
+    openDeleteModal (event) {
+        this.recordId = event.currentTarget.dataset.id;
+        this.deleteContactModal = true;
+    }
+
+    closeDeleteModal () {
+        this.deleteContactModal = false;
     }
 }

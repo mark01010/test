@@ -21,7 +21,7 @@ export default class ContactEditModal extends LightningElement {
 
     updateData() {
         updateContact({
-            contactFieldsMap : this.contactData
+            contactFieldsMap : JSON.stringify(this.contactData)
         }).then(() => {
             showSuccessToast();
             this.dispatchEvent(new CustomEvent('update'));
