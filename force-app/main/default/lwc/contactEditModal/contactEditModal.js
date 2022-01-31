@@ -16,7 +16,6 @@ export default class ContactEditModal extends LightningElement {
     handleSelect(event) {
         this.contactData[event.target.fieldName] = event.target.value;
         this.contactData['id'] = this.recordId;
-        console.log(this.contactData);
     }
 
     updateData() {
