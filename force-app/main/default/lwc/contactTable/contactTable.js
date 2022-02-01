@@ -26,12 +26,12 @@ export default class ContactTable extends LightningElement {
     };
 
     deleteCurrentContact(){
-        deleteContact({recordId : this.contactRecordId})
-            .then(() => {
+        deleteContact({
+            recordId : this.contactRecordId
+        }).then(() => {
                 showSuccessToast();
                 refreshApex(this.wiredResult);
-                })
-            .catch(error => showErrorToast(error));
+        }).catch(error => showErrorToast(error));
     }
 
     get hasContacts() {

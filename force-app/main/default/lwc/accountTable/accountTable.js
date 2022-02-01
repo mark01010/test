@@ -30,13 +30,13 @@ export default class AccountTable extends LightningElement {
     }
 
     deleteAccount() {
-        deleteAccount({recordId : this.currentAccountId})
-            .then(() => {
+        deleteAccount({
+            recordId : this.currentAccountId
+        }).then(() => {
                 showSuccessToast();
                 refreshApex(this.getListAccountResult);
                 this.closeDeleteModal();
-            })
-            .catch(error => showErrorToast(error));
+        }).catch(error => showErrorToast(error));
     }
 
     openAccountEditModal(event) {

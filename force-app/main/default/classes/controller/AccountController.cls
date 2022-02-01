@@ -1,6 +1,6 @@
 public with sharing class AccountController {
     @AuraEnabled(Cacheable = true)
-    public static List<Account> getList () {
+    public static List<Account> getList() {
         return [
                 SELECT Name, Phone, Rating, (SELECT Id FROM Contacts)
                 FROM Account
@@ -14,7 +14,7 @@ public with sharing class AccountController {
     }
 
     @AuraEnabled
-    public static void deleteRecord (String recordId){
+    public static void deleteRecord(String recordId) {
         delete new Account(Id = recordId);
     }
 }

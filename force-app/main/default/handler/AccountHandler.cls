@@ -6,7 +6,7 @@ public with sharing class AccountHandler {
             }
         }
     }
-    private static void deleteContactsByAccountId(Map<Id, Account> oldRecords){
+    private static void deleteContactsByAccountId(Map<Id, Account> oldRecords) {
         List<Contact> contactsForDelete = [
                 SELECT Id
                 FROM Contact

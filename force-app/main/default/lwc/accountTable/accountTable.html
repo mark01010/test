@@ -44,8 +44,7 @@
                                               value="edit"
                                               data-id={item.Id}
                                               onclick={openAccountEditModal}
-                            >
-                            </lightning-button>
+                            ></lightning-button>
                         </td>
                         <td class="slds-size_1-of-12 slds-text-align_center">
                             <lightning-button variant="destructive"
@@ -54,8 +53,7 @@
                                               icon-position="right"
                                               data-id={item.Id}
                                               onclick={openDeleteModal}
-                            >
-                            </lightning-button>
+                            ></lightning-button>
                         </td>
                     </tr>
                 </template>
@@ -64,34 +62,22 @@
     </div>
 
     <template if:true={deleteAccountModal}>
-        <section class="slds-modal slds-fade-in-open">
-            <div class="slds-modal__container">
-                <header class="slds-modal__header">
-                    <h2 id="modal-heading-01" class="slds-modal__title ">
-                        Delete?
-                    </h2>
-                </header>
-                <div class="slds-modal__content slds-p-around_medium">
-                    <div class="slds-p-bottom_large slds-p-left_large slds-grid slds-grid_align-space">
-                        <lightning-button
-                                label="Yes"
-                                class="slds-m-top_medium slds-col"
-                                onclick={deleteAccount}
-                        >
-                        </lightning-button>
-                        <lightning-button
-                                class="slds-m-top_medium slds-col"
-                                label="No"
-                                onclick={closeDeleteModal}
-                        ></lightning-button>
-                    </div>
-                </div>
+        <c-modals-form >
+            <div slot="header">Delete?</div>
+            <div class="slds-p-bottom_large slds-p-left_large slds-grid slds-grid_align-space">
+                <lightning-button
+                        label="Yes"
+                        class="slds-m-top_medium slds-col"
+                        onclick={deleteAccount}
+                ></lightning-button>
+
+                <lightning-button
+                        class="slds-m-top_medium slds-col"
+                        label="No"
+                        onclick={closeDeleteModal}
+                ></lightning-button>
             </div>
-        </section>
-    <div
-            class="slds-backdrop slds-backdrop_open modalBackdrops"
-            id="modalBackdrops"
-    ></div>
+        </c-modals-form>
     </template>
 
     <template if:true={currentAccountId}>
@@ -103,7 +89,6 @@
                 record-id={currentAccountId}
                 onclose={closeAccountEditModal}
                 onupdate={refreshAccountTable}
-        >
-        </c-account-edit-modal>
+        ></c-account-edit-modal>
     </template>
 </template>
