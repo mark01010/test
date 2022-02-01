@@ -8,8 +8,8 @@ public with sharing class AccountController {
     }
 
     @AuraEnabled
-    public static void updateAccount(String accountFieldsMap) {
-        Account account = (Account)JSON.deserialize(accountFieldsMap, Account.class);
+    public static void updateAccount(String accountFields) {
+        Account account = (Account)JSON.deserialize(accountFields, Account.class);
         update account;
     }
 
