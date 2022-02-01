@@ -22,7 +22,7 @@ export default class AccountEditModal extends LightningElement {
         }).then(() => {
             showSuccessToast();
             this.dispatchEvent(new CustomEvent('update'));
-        }).catch((error) => showErrorToast(error));
+        }).catch(error => showErrorToast(error));
     }
 
     handleSelect(event) {

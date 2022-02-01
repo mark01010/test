@@ -24,7 +24,7 @@ export default class ContactEditModal extends LightningElement {
         }).then(() => {
             showSuccessToast();
             this.dispatchEvent(new CustomEvent('update'));
-        }).catch((error) => showErrorToast(error));
+        }).catch(error => showErrorToast(error));
     }
 
     closeEditModal() {
