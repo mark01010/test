@@ -11,21 +11,49 @@
                 <!--Header of the table-->
                 <thead>
                     <tr>
-                        <th class="slds-size_1-of-1" scope="col">
+                        <th class="slds-size_4-of-12">
                             <div title="Name">Contact Name</div>
+                        </th>
+                        <th class="slds-size_2-of-12">
+                            <div title="Phone">Phone</div>
+                        </th>
+                        <th class="slds-size_2-of-12">
+                            <div title="LeadSource">LeadSource</div>
                         </th>
                     </tr>
                 </thead>
-
                 <!--Body of the table-->
                 <tbody>
                     <template for:each={contacts} for:item="item">
-                        <tr
-                                key={item.Id}
-                                data-id={item.Id}
-                        >
-                            <td class="slds-size_1-of-1">
-                                {item.Name}
+                        <tr key={item.Id}>
+                            <td class="slds-size_4-of-12">
+                                <a href={item.contactUrl} target="_blank">{item.Name}</a>
+                            </td>
+                            <td class="slds-size_2-of-12">
+                                {item.Phone}
+                            </td>
+                            <td class="slds-size_2-of-12">
+                                {item.LeadSource}
+                            </td>
+                            <td class="slds-size_2-of-12 slds-text-align_center">
+                                {item.numberContacts}
+                            </td>
+                            <td class ="slds-size_1-of-12">
+                                <lightning-button label="Edit"
+                                                  value="edit"
+                                                  data-id={item.Id}
+                                                  onclick={openContactEditModal}
+                                ></lightning-button>
+                            </td>
+                            <td >
+                                <lightning-button variant="destructive"
+                                                  label="Delete"
+                                                  icon-name="utility:delete"
+                                                  icon-position="right"
+                                                  data-id={item.Id}
+                                                  data-name={item.Name}
+                                                  onclick={openDeleteModal}
+                                ></lightning-button>
                             </td>
                         </tr>
                     </template>
@@ -33,4 +61,31 @@
             </table>
         </template>
     </div>
+
+    <template if:true={deleteContactModal}>
+        <c-modals-form >
+            <div slot="header">Delete {contactName} Contact?</div>
+            <div class="slds-p-bottom_large slds-p-left_large slds-grid slds-grid_align-space">
+                <lightning-button
+                        label="Yes"
+                        class="slds-m-top_medium slds-col"
+                        onclick={deleteCurrentContact}
+                ></lightning-button>
+
+                <lightning-button
+                        class="slds-m-top_medium slds-col"
+                        label="No"
+                        onclick={closeDeleteModal}
+                ></lightning-button>
+            </div>
+        </c-modals-form>
+    </template>
+
+    <template if:true={editContactModal}>
+        <c-contact-edit-modal
+            record-id={contactRecordId}
+            onclose={closeContactEditModal}
+            onupdate={refreshContactTable}
+        ></c-contact-edit-modal>
+    </template>
 </template>

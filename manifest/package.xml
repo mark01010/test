@@ -4,12 +4,20 @@
         <members>accountTable</members>
         <members>showToastService</members>
         <members>contactTable</members>
+        <members>accountEditModal</members>
+        <members>contactEditModal</members>
+        <members>modalsForm</members>
         <name>LightningComponentBundle</name>
     </types>
     <types>
         <members>AccountController</members>
         <members>ContactController</members>
+        <members>AccountHandler</members>
         <name>ApexClass</name>
+    </types>
+    <types>
+        <members>AccountTrigger</members>
+        <name>ApexTrigger</name>
     </types>
     <version>53.0</version>
 </Package>
