@@ -17,6 +17,7 @@ export default class AccountEditModal extends LightningElement {
     }
 
     updateData() {
+        this.accountData['Id'] = this.recordId;
         updateAccount({
             accountFieldsMap : JSON.stringify(this.accountData)
         }).then(() => {
@@ -27,6 +28,5 @@ export default class AccountEditModal extends LightningElement {
 
     handleSelect(event) {
         this.accountData[event.target.fieldName] = event.target.value;
-        this.accountData['Id'] = this.recordId;
     }
 }

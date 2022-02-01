@@ -15,10 +15,10 @@ export default class ContactEditModal extends LightningElement {
 
     handleSelect(event) {
         this.contactData[event.target.fieldName] = event.target.value;
-        this.contactData['id'] = this.recordId;
     }
 
     updateData() {
+        this.contactData['id'] = this.recordId;
         updateContact({
             contactFieldsMap : JSON.stringify(this.contactData)
         }).then(() => {
