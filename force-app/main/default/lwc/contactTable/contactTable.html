@@ -51,6 +51,7 @@
                                                   icon-name="utility:delete"
                                                   icon-position="right"
                                                   data-id={item.Id}
+                                                  data-name={item.Name}
                                                   onclick={openDeleteModal}
                                 ></lightning-button>
                             </td>
@@ -63,7 +64,7 @@
 
     <template if:true={deleteContactModal}>
         <c-modals-form >
-            <div slot="header">Delete?</div>
+            <div slot="header">Delete {contactName} Contact?</div>
             <div class="slds-p-bottom_large slds-p-left_large slds-grid slds-grid_align-space">
                 <lightning-button
                         label="Yes"

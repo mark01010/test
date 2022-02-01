@@ -3,7 +3,7 @@ import {ShowToastEvent} from "lightning/platformShowToastEvent";
 const showErrorToast = (error) => {
     const evt = new ShowToastEvent({
         title: 'Toast Error',
-        message: error.body.message,
+        message: error.body.pageErrors[0].message,
         variant: 'error',
         mode: 'dismissable'
     });

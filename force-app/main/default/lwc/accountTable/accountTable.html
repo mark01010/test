@@ -24,7 +24,9 @@
                 <template for:each={accounts} for:item="item">
                     <tr
                         key={item.Id}
+                        class="line"
                         data-id={item.Id}
+                        data-active={item.active}
                         onclick={openContacts}
                     >
                         <td class="slds-size_4-of-12">
@@ -52,6 +54,7 @@
                                               icon-name="utility:delete"
                                               icon-position="right"
                                               data-id={item.Id}
+                                              data-name={item.Name}
                                               onclick={openDeleteModal}
                             ></lightning-button>
                         </td>
@@ -63,7 +66,7 @@
 
     <template if:true={deleteAccountModal}>
         <c-modals-form >
-            <div slot="header">Delete?</div>
+            <div slot="header">Delete {accountName} Account?</div>
             <div class="slds-p-bottom_large slds-p-left_large slds-grid slds-grid_align-space">
                 <lightning-button
                         label="Yes"

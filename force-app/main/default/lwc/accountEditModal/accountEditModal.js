@@ -19,7 +19,7 @@ export default class AccountEditModal extends LightningElement {
     updateData() {
         this.accountData['Id'] = this.recordId;
         updateAccount({
-            accountFieldsMap : JSON.stringify(this.accountData)
+            jsonStr : JSON.stringify(this.accountData)
         }).then(() => {
             showSuccessToast();
             this.dispatchEvent(new CustomEvent('update'));

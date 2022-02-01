@@ -10,6 +10,7 @@ export default class AccountTable extends LightningElement {
     @track deleteAccountModal;
     currentAccountId;
     getListAccountResult;
+    accountName;
 
     @wire (getListAccount)
     getAccounts(result) {
@@ -18,7 +19,8 @@ export default class AccountTable extends LightningElement {
             this.accounts = result.data.map(account => ({
                 ...account,
                 accountUrl: '/' + account.Id,
-                numberContacts:  account.Contacts ? account.Contacts.length : 0
+                numberContacts:  account.Contacts ? account.Contacts.length : 0,
+                active: false
             }));
         } else if (result.error) {
             showErrorToast(result.error);
@@ -27,6 +29,10 @@ export default class AccountTable extends LightningElement {
 
     openContacts(event) {
         this.currentAccountId = event.currentTarget.dataset.id;
+        this.accounts = this.accounts.map(acc => {
+            acc.active = acc.Id === event.currentTarget.dataset.id;
+            return acc;
+        });
     }
 
     deleteAccount() {
@@ -35,8 +41,9 @@ export default class AccountTable extends LightningElement {
         }).then(() => {
                 showSuccessToast();
                 refreshApex(this.getListAccountResult);
-                this.closeDeleteModal();
+                this.template.querySelector('c-contact-table').hasContacts();
         }).catch(error => showErrorToast(error));
+        this.closeDeleteModal();
     }
 
     openAccountEditModal(event) {
@@ -54,6 +61,7 @@ export default class AccountTable extends LightningElement {
     }
 
     openDeleteModal (event) {
+        this.accountName = event.currentTarget.dataset.name;
         this.currentAccountId = event.currentTarget.dataset.id;
         this.deleteAccountModal = true;
     }
