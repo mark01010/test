@@ -14,8 +14,8 @@ public with sharing class ContactController {
     }
 
     @AuraEnabled
-    public static void updateContact(String contactFields) {
-        Contact contact = (Contact)JSON.deserialize(contactFields, Contact.class);
+    public static void updateContact(String jsonStr) {
+        Contact contact = (Contact)JSON.deserialize(jsonStr, Contact.class);
         update contact;
     }
 }
